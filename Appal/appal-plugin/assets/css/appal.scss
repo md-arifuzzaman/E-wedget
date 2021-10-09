@@ -1,0 +1,17 @@
+.appal-nav-builder {
+  &.header-section {
+    padding: inherit;
+  }
+.main-menubar{
+  display: flex;
+}
+  .menu-wrapper {
+    display: flex;
+    li{
+      list-style: none;
+    }
+  }
+  .slicknav_btn .slicknav_nav_icon{
+    color: #333333;
+  }
+}

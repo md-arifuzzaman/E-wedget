@@ -1,0 +1,15 @@
+.appal-nav-builder.header-section {
+  padding: inherit;
+}
+.appal-nav-builder .main-menubar {
+  display: flex;
+}
+.appal-nav-builder .menu-wrapper {
+  display: flex;
+}
+.appal-nav-builder .menu-wrapper li {
+  list-style: none;
+}
+.appal-nav-builder .slicknav_btn .slicknav_nav_icon {
+  color: #333333;
+}/*# sourceMappingURL=appal.css.map */

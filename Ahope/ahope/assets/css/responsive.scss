@@ -1,0 +1,15 @@
+@media only screen and (max-width: 991px){
+    .packege_pricing_area_11 .toggle_radio label{
+        width: 130px;
+    }
+    .packege_pricing_area_11 {
+        .tab_wrapper {
+            height: 1340px;
+        }
+    }
+}
+@media only screen and (max-width: 480px) {
+    .packege_pricing_area_11 .tab_wrapper {
+        height: 600px;
+    }
+}
