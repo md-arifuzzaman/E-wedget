@@ -8,8 +8,8 @@
 			add_action('init', array(&$this,'create_builder_post_taxonomy'));
             add_action('init', array(&$this, 'create_services_cpt'));
             add_action('init', array(&$this, 'services_taxonomy'), 0);
-            add_action('init', array(&$this, 'create_doctors_cpt'));
-            add_action('init', array(&$this, 'doctors_taxonomy'), 0);
+            add_action('init', array(&$this, 'create_features_cpt'));
+            add_action('init', array(&$this, 'features_taxonomy'), 0);
 
         }
 	  // Builder Post Type
@@ -119,36 +119,36 @@
         }
 
        // Doctor Post Type
-        function create_doctors_cpt() {
+        function create_features_cpt() {
             $labels = array(
-                'name' => __('Doctors', 'landzai'),
+                'name' => __('Features', 'landzai'),
                 'singular_name' => __('Doctor', 'landzai'),
-                'add_new' => __('Add doctor', 'landzai'),
-                'add_new_item' => __('Add doctor', 'landzai'),
-                'edit_item' => __('Edit doctor', 'landzai'),
-                'new_item' => __('New doctor', 'landzai'),
-                'all_items' => __('All doctor', 'landzai'),
-                'view_item' => __('View doctor', 'landzai'),
-                'search_items' => __('Search doctor', 'landzai'),
-                'not_found' => __('No doctor found', 'landzai'),
-                'not_found_in_trash' => __('No doctor found in the trash', 'landzai'),
+                'add_new' => __('Add feature', 'landzai'),
+                'add_new_item' => __('Add feature', 'landzai'),
+                'edit_item' => __('Edit feature', 'landzai'),
+                'new_item' => __('New feature', 'landzai'),
+                'all_items' => __('All feature', 'landzai'),
+                'view_item' => __('View feature', 'landzai'),
+                'search_items' => __('Search feature', 'landzai'),
+                'not_found' => __('No feature found', 'landzai'),
+                'not_found_in_trash' => __('No feature found in the trash', 'landzai'),
                 'parent_item_colon' => '',
                 'supports' => array('post-formats'),
-                'menu_name' => __('Doctors', 'landzai')
+                'menu_name' => __('Features', 'landzai')
             );
             $args = array(
                 'labels' => $labels,
                 'public' => true,
                 'menu_position' => 6,
                 'menu_icon' => 'dashicons-plus-alt',
-                'taxonomies' => array('doctor_category'),
+                'taxonomies' => array('feature_category'),
                 'supports' => array('title', 'editor', 'thumbnail', 'excerpt','elementor'),
                 'has_archive' => true,
             );
-            register_post_type('doctors', $args);
+            register_post_type('features', $args);
         }
 
-        function Doctors_taxonomy() {
+        function Features_taxonomy() {
             $labels = array(
                 'name' => __('Category', 'landzai'),
                 'singular_name' => __('Category', 'landzai'),
@@ -167,9 +167,9 @@
                 'hierarchical' => true,
                 'show_ui' => true,
                 'show_admin_column' => true,
-                'rewrite' => array('slug' => 'doctor_category'),
+                'rewrite' => array('slug' => 'feature_category'),
             );
-            register_taxonomy('doctor_category', 'doctors', $args);
+            register_taxonomy('feature_category', 'features', $args);
         }
 					
 	}  

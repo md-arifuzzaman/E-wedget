@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 
-class landzai_faq extends Widget_Base {
+class landzai_sslider extends Widget_Base {
 
     public function get_name() {
-        return 'landzai-faq';
+        return 'landzai-sslider';
     }
  
     public function get_title() {
-        return __('FAQ', 'landzai');
+        return __('Screenshot Slider', 'landzai');
     }
 
     public function get_icon() {
@@ -38,7 +38,7 @@ class landzai_faq extends Widget_Base {
             [
                 'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Got A Question?', 'landzai' ),
+                'default' => __( 'All App Screen’s', 'landzai' ),
             ]
         );
         $this->add_control(
@@ -46,11 +46,20 @@ class landzai_faq extends Widget_Base {
             [
                 'label' => __( 'Info', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
+                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
             ]
         );
-        $this->add_control(
+        $repeater = new \Elementor\Repeater();
+        $repeater->add_control(
+            'title',
+            [
+                'label' => __( 'Screen Name', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Landzai', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
             'image',
             [
                 'label' => __( 'Choose Image', 'landzai' ),
@@ -60,49 +69,33 @@ class landzai_faq extends Widget_Base {
                 ],
             ]
         );
-        $repeater = new \Elementor\Repeater();
-        $repeater->add_control(
-            'f_title',
-            [
-                'label' => __( 'Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            'f_info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor tempus sit id commu
-                 tincidunt. Tempor etiam at in nisl ac tortor, ut vitae fermentum. Nibh eget blandit suscipit
-                  ornare donec eget semper orci. Malesuada tortor neque, posuere egtnhet viverra auctor ac
-                   egestas tellus. Turpis venenatis, viverra nisi aliquet diam 
-                odio condimentum. In vel consectetur auctor interdum pulvinar tortor. Duis turpis in sit', 'landzai' ),
-            ]
-        );
         $this->add_control(
-            'faq_list',
+            'slider_list',
             [
-                'label' => __( 'Faq List', 'landzai' ),
+                'label' => __( 'Slider List', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                        'title' => __( 'Landzai', 'landzai' ),
                     ],
                     [
-                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                        'title' => __( 'Landzai', 'landzai' ),
                     ],
                     [
-                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                        'title' => __( 'Landzai', 'landzai' ),
                     ],
                     [
-                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                        'title' => __( 'Landzai', 'landzai' ),
                     ],
-
+                    [
+                        'title' => __( 'Landzai', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'Landzai', 'landzai' ),
+                    ],
                 ],
-                'title_field' => '{{{ f_title }}}',
+                'title_field' => '{{{ title }}}',
             ]
         );
         $this->end_controls_section();
@@ -204,8 +197,8 @@ class landzai_faq extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        echo ' <!-- faq area start here  -->
-        <section class="faq-area section">
+        echo '    <!-- App Screens area start here  -->
+        <section class="app-screens-area section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -215,48 +208,24 @@ class landzai_faq extends Widget_Base {
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="faq-list">
-                            <div class="accordion" id="accordionExample">';
-
-        if ($settings['faq_list']) {
-            $index = 0;
-            foreach ($settings['faq_list'] as $faq) {
-                $index++;
-                if ($index == 0){
-                    $show = 'show';
-                    $collapsed = '';
-                } else {
-                    $show = '';
-                    $collapsed = 'collapsed';
-                }
-                echo '<div class="card">
-                                    <div class="card-header" id="heading'.$faq['_id'].'">
-                                        <button type="button" class="btn btn-link '.$collapsed.'" data-toggle="collapse" data-target="#collapse'.$faq['_id'].'">'.$faq['f_title'].'</button>
-                                    </div>
-                                    <div id="collapse'.$faq['_id'].'" class="collapse '.$show.'" aria-labelledby="heading'.$faq['_id'].'" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <p>'.$faq['f_info'].' </p>
-                                        </div>
-                                    </div>
-                                </div>';
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="app-screens-slide">';
+        if ($settings['slider_list']) {
+            foreach ($settings['slider_list'] as $slide) {
+                echo '<div class="single-screen">
+                                '.get_that_image($slide['image']).'
+                            </div>';
             }
         }
                 echo '</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="faq-img">
-                            '.get_that_image($settings['image']).'
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- faq area end here  -->';
+        <!-- App Screens area end here  -->';
     }
 
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_faq() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_sslider() );

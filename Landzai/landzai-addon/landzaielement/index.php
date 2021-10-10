@@ -15,7 +15,7 @@ if (!class_exists('LandzaiElement_Elementor_Addons')) :
     final class LandzaiElement_Elementor_Addons {
 
         /** Singleton *************************************************************/
-
+        const LIST_CONTROL = 'landzai_lists_control';
         private static $instance;
 
         /**
@@ -118,6 +118,7 @@ if (!class_exists('LandzaiElement_Elementor_Addons')) :
         private function hooks() {
 
             add_action('plugins_loaded', array($this, 'load_plugin_textdomain'));
+            add_action('elementor/controls/controls_registered', array($this, 'init_controls'), 10);
             add_action('elementor/frontend/after_register_scripts', array($this, 'register_frontend_scripts'), 10);
             add_action('elementor/frontend/after_enqueue_styles', array($this, 'register_frontend_styles'), 10);
             add_action('elementor/editor/before_enqueue_scripts', array($this, 'register_elementor_editor_css'), 10);
@@ -126,7 +127,15 @@ if (!class_exists('LandzaiElement_Elementor_Addons')) :
             add_filter( 'elementor/icons_manager/additional_tabs', array($this, 'add_material_icons_tabs' ) );
 
         }
-            
+        public function init_controls()
+        {
+
+            require_once Landzai_PLUGIN_DIR . 'includes/class-control-list.php';
+
+            $controls_manager = \Elementor\Plugin::$instance->controls_manager;
+
+            $controls_manager->register_control(self::LIST_CONTROL, new Landzai_Lists_Control());
+        }
         public function add_material_icons_tabs( $tabs = array() ) {
 
             $tabs['landzaiicon'] = array(

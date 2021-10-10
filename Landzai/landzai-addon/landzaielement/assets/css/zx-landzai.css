@@ -1,9 +1,12 @@
 /*Global*/
-#medi-main-builder-header {
+.landzai-builder-nav {
   display: flex;
 }
-#medi-main-builder-header .mobile_menu_button {
-  position: initial;
+.landzai-builder-nav .mobile-menu-area .menu-bar {
+    margin: 0;
+}
+.landzai-builder-nav .header-v5 {
+    padding: 0;
 }
 .landzai-text-gradient .elementor-heading-title {
   -webkit-background-clip: text;

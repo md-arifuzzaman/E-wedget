@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 
-class landzai_app extends Widget_Base {
+class landzai_testimonial extends Widget_Base {
 
     public function get_name() {
-        return 'landzai-app';
+        return 'landzai-testimonial';
     }
  
     public function get_title() {
-        return __('App', 'landzai');
+        return __('Testimonail', 'landzai');
     }
 
     public function get_icon() {
@@ -36,22 +36,47 @@ class landzai_app extends Widget_Base {
         $this->add_control(
             'title',
             [
-                'label' => __( 'App Name', 'landzai' ),
+                'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'All App Screen’s', 'landzai' ),
+                'default' => __( 'What Our Client Says', 'landzai' ),
             ]
         );
         $this->add_control(
             'info',
             [
-                'label' => __( 'App info', 'landzai' ),
+                'label' => __( 'Info', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
+                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
             ]
         );
         $repeater = new \Elementor\Repeater();
         $repeater->add_control(
-            'image',
+            't_title',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Jerome Bell', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            't_subtitle',
+            [
+                'label' => __( 'Sub Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'CEO, Angular Corporation', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            't_info',
+            [
+                'label' => __( 'Info', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( '“Lorem ipsum dolor sit amet,  kasd gubergren, no sea takimata dolores et ea rebum. Stet clita ', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            'thumb',
             [
                 'label' => __( 'Choose Image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
@@ -60,34 +85,43 @@ class landzai_app extends Widget_Base {
                 ],
             ]
         );
-        
+        $repeater->add_control(
+            't_link', [
+                'label' => __('Link', 'landzai'),
+                'type' => Controls_Manager::URL,
+                'show_external' => true,
+                'default' => [
+                    'url' => '#',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ],
+            ]
+        );
         $this->add_control(
-            'app_list',
+            'testi_list',
             [
-                'label' => __( 'App List', 'landzai' ),
+                'label' => __( 'Testimonial List', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'title' => __( 'Landzai', 'landzai' ),
+                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
                     ],
-                    [
-                        'title' => __( 'Landzai', 'landzai' ),
+                     [
+                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
                     ],
-                    [
-                        'title' => __( 'Landzai', 'landzai' ),
+                     [
+                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
                     ],
-                    [
-                        'title' => __( 'Landzai', 'landzai' ),
+                     [
+                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
                     ],
-                    [
-                        'title' => __( 'Landzai', 'landzai' ),
+                     [
+                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
                     ],
-                    [
-                        'title' => __( 'Landzai', 'landzai' ),
-                    ],
+
                 ],
-                'title_field' => '{{{ title }}}',
+                'title_field' => '{{{ t_title }}}',
             ]
         );
         $this->end_controls_section();
@@ -189,36 +223,46 @@ class landzai_app extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        echo'<!-- App Screens area start here  -->
-        <section class="app-screens-area section">
+        echo '<!-- testimonial area start here  -->
+        <section class="testimonial-area section" id="testimonial">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <h2 class="title">'.$settings['title'].'</h2>
+                             <h2 class="title">'.$settings['title'].'</h2>
                             <p class="sub-title">'.$settings['info'].'</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="app-screens-slide">';
-                        if ($settings['app_list']) {
-                            foreach ($settings['app_list'] as $app) {
-                        echo '<div class="single-screen">
-                            '.get_that_image($app['image']).'
-                            </div>';
-                            }
-                        }
+                        <div class="testimonial-slide">';
 
-                       echo' </div>
+            if ($settings['testi_list']) {
+                foreach ($settings['testi_list'] as $testi) {
+                echo '<div class="sigle-testimonial text-center">
+                                <div class="quote-iocn">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <div class="clint-image">
+                                   '.get_that_image($testi['thumb']).'
+                                </div>
+                                <p>'.$testi['t_info'].'</p>
+                                <div class="clinmg-info">
+                                    <h4><a '.get_that_link($testi['t_link']).'>'.$testi['t_title'].'</a></h4>
+                                    <span>'.$testi['t_subtitle'].'</span>
+                                </div>
+                            </div>';
+                    }
+                }
+                echo ' </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- App Screens area end here  -->';
+        <!-- testimonial area end here  -->';
     }
 
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_app() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_testimonial() );

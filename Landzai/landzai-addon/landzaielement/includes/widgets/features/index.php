@@ -2,14 +2,14 @@
 namespace Elementor;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class landzai_blog extends Widget_Base {
+class landzai_features extends Widget_Base {
 
    public function get_name() {
-      return 'landzai-blog';
+      return 'landzai-features';
    }
 
    public function get_title() {
-      return __( 'Blog', 'landzai' );
+      return __( 'Features', 'landzai' );
    }
     public function get_categories() {
 		return [ 'landzaielement-addons' ];
@@ -23,7 +23,7 @@ class landzai_blog extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __( 'Blog', 'landzai' ),
+                'label' => __( 'Features', 'landzai' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -32,18 +32,10 @@ class landzai_blog extends Widget_Base {
             [
                 'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Read The Latest News Here', 'landzai' ),
+                'default' => __( 'Useful Features', 'landzai' ),
             ]
         );
-        $this->add_control(
-            'info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                 invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
-            ]
-        );
+        
         $this->add_control(
             'query_type',
             [
@@ -62,7 +54,7 @@ class landzai_blog extends Widget_Base {
             [
                 'label' => __('Category', 'landzai'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => ae_drop_cat('category'),
+                'options' => ae_drop_cat('feature_category'),
                 'multiple' => true,
                 'label_block' => true,
                 'condition' => [
@@ -76,7 +68,7 @@ class landzai_blog extends Widget_Base {
             [
                 'label' => __('Posts', 'landzai'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => ae_drop_posts('post'),
+                'options' => ae_drop_posts('features'),
                 'multiple' => true,
                 'label_block' => true,
                 'condition' => [
@@ -90,6 +82,29 @@ class landzai_blog extends Widget_Base {
                 'label' => __('Posts Per Page', 'landzai'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3,
+            ]
+        );
+        $this->add_control(
+            'layout',
+            [
+                'label' => __( 'Layout', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'layout1' => [
+                        'title' => __( 'One', 'landzai' ),
+                        'icon' => 'eicon-form-horizontal',
+                    ],
+                    'layout2' => [
+                        'title' => __( 'Two', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                    'layout3' => [
+                        'title' => __( 'Three', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                ],
+                'default' => 'layout1',
+                'toggle' => true,
             ]
         );
         $this->end_controls_section();
@@ -182,11 +197,11 @@ class landzai_blog extends Widget_Base {
 
         if($settings['query_type'] == 'category'){
             $query_args = array(
-                'post_type' => 'post',
+                'post_type' => 'features',
                 'posts_per_page' => $per_page,
                 'tax_query' => array(
                     array(
-                        'taxonomy' => 'category',
+                        'taxonomy' => 'feature_category',
                         'field' => 'term_id',
                         'terms' => $cat,
                     ) ,
@@ -196,7 +211,7 @@ class landzai_blog extends Widget_Base {
 
         if($settings['query_type'] == 'individual'){
             $query_args = array(
-                'post_type' => 'post',
+                'post_type' => 'features',
                 'posts_per_page' => $per_page,
                 'post__in' =>$id,
                 'orderby' => 'post__in'
@@ -204,48 +219,8 @@ class landzai_blog extends Widget_Base {
         }
 
         $wp_query = new \WP_Query($query_args);
-    echo '<!-- blog ara start here  -->
-        <section class="blog-area section pb-90">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <h2 class="title">'.$settings['title'].'</h2>
-                            <p class="sub-title">'.$settings['info'].'</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">';
-    if ($wp_query->have_posts()) {
-        while ($wp_query->have_posts()) {
-            $wp_query->the_post();
-            echo '<div class="col-lg-4 col-md-6">
-                        <div class="single-blog">
-                            <div class="blog-img">
-                                      <a href="' . get_the_permalink() . '">';
-                                        if (has_post_thumbnail()) {
-                                            the_post_thumbnail('full');
-                                        }
-                                        echo '</a>
-                            </div>
-                            <div class="blog-info">
-                                <h3 class="blog-title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>
-                                <ul class="blog-meta">
-                                    <li><a href="'.get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('j')).'"><i class="far fa-calendar"></i> '.get_the_time('j F, Y').'</a></li>
-                                    <li><a href="#"><i class="far fa-clock"></i> '.display_read_time().' Min To Read</a></li>
-                                </ul>
-                                <p class="blog-cotent"></p>
-                                <a href="' . get_the_permalink() . '" class="blog-btn">Read More</a>
-                            </div>
-                        </div>
-                    </div>';
-        }
-        wp_reset_postdata();
-    }
-    echo '</div>
-            </div>
-        </section>
-        <!-- blog ara end here  -->';
+
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
     protected function _content_template() {}
 
@@ -254,5 +229,5 @@ class landzai_blog extends Widget_Base {
    public function render_plain_content( $instance = [] ) {}
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_blog() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_features() );
 ?>
