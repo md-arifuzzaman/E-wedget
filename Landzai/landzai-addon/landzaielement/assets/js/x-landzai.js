@@ -236,6 +236,29 @@
 
     };
 
+    var LandzaiTestimonial2 = function ($scope, $) {
+
+        $scope.find('.testimonial-two-area').each(function () {
+            var settings = $(this).data('landzai');
+
+        // Js Start
+    $(".testimonial-slide-two").slick({
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        dots: true,
+        arrows: true,
+        prevArrow: '<i class="arow-prev fas fa-chevron-left"></i>',
+        nextArrow: '<i class="arow-next fas fa-chevron-right"></i>',
+      });
+            // Js End
+        });
+
+    };
+
 
     $(window).on('elementor/frontend/init', function () {
         if (elementorFrontend.isEditMode()) {
@@ -246,6 +269,7 @@
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-howwork.default', LandzaiWork);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-sslider.default', LandzaiScreenshot);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial);
+            elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial2);
         }
         else {
             console.log('Elementor frontend mod loaded');
@@ -254,6 +278,7 @@
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-howwork.default', LandzaiWork);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-sslider.default', LandzaiScreenshot);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial);
+            elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial2);
         }
     });
 console.log('addon js loaded');

@@ -124,6 +124,25 @@ class landzai_testimonial extends Widget_Base {
                 'title_field' => '{{{ t_title }}}',
             ]
         );
+        $this->add_control(
+            'layout',
+            [
+                'label' => __( 'Layout', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'layout1' => [
+                        'title' => __( 'One', 'landzai' ),
+                        'icon' => 'eicon-form-horizontal',
+                    ],
+                    'layout2' => [
+                        'title' => __( 'Two', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                ],
+                'default' => 'layout1',
+                'toggle' => true,
+            ]
+        );
         $this->end_controls_section();
         
         $this->start_controls_section(
@@ -223,44 +242,7 @@ class landzai_testimonial extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        echo '<!-- testimonial area start here  -->
-        <section class="testimonial-area section" id="testimonial">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                             <h2 class="title">'.$settings['title'].'</h2>
-                            <p class="sub-title">'.$settings['info'].'</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="testimonial-slide">';
-
-            if ($settings['testi_list']) {
-                foreach ($settings['testi_list'] as $testi) {
-                echo '<div class="sigle-testimonial text-center">
-                                <div class="quote-iocn">
-                                    <i class="fas fa-quote-left"></i>
-                                </div>
-                                <div class="clint-image">
-                                   '.get_that_image($testi['thumb']).'
-                                </div>
-                                <p>'.$testi['t_info'].'</p>
-                                <div class="clinmg-info">
-                                    <h4><a '.get_that_link($testi['t_link']).'>'.$testi['t_title'].'</a></h4>
-                                    <span>'.$testi['t_subtitle'].'</span>
-                                </div>
-                            </div>';
-                    }
-                }
-                echo ' </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- testimonial area end here  -->';
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
 
 

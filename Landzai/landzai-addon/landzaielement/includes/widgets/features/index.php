@@ -116,25 +116,7 @@ class landzai_features extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_control(
-            'layout',
-            [
-                'label' => __( 'Layout', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    'layout1' => [
-                        'title' => __( 'Layout 1', 'landzai' ),
-                        'icon' => 'eicon-form-horizontal',
-                    ],
-                    'layout2' => [
-                        'title' => __( 'Layout 2', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                ],
-                'default' => 'layout1',
-                'toggle' => true,
-            ]
-        );
+        
         $this->add_control(
             'post_title_color',
             [

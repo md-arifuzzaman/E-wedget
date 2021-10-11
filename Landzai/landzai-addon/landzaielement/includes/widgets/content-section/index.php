@@ -86,6 +86,75 @@ class landzai_content_section extends Widget_Base
                 ],
             ]
         );
+        $repeater = new \Elementor\Repeater();
+        $repeater->add_control(
+            'title3',
+            [
+                'label' => __('Title', 'landzai'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Cloud Service', 'landzai'),
+            ]
+        );
+        $repeater->add_control(
+            'image3',
+            [
+                'label' => __( 'Choose Image', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+        $this->add_control(
+            'content_list3',
+            [
+                'label' => __( 'Brand List', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'condition' => [
+                    'layout' => 'layout3',
+                ],
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'title' => __( 'Landzai', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'Landzai', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'Landzai', 'landzai' ),
+                    ],
+                ],
+                'title_field' => '{{{ title3 }}}',
+            ]
+        );
+        $this->add_control(
+            'layout',
+            [
+                'label' => __( 'Layout', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'layout1' => [
+                        'title' => __( 'One', 'landzai' ),
+                        'icon' => 'eicon-form-horizontal',
+                    ],
+                    'layout2' => [
+                        'title' => __( 'Two', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                    'layout3' => [
+                        'title' => __( 'Three', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                    'layout4' => [
+                        'title' => __( 'Four', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                ],
+                'default' => 'layout1',
+                'toggle' => true,
+            ]
+        );
 
         $this->end_controls_section();
         $this->start_controls_section(
@@ -96,7 +165,7 @@ class landzai_content_section extends Widget_Base
             ]
         );
         $this->add_control(
-            'title_color',
+            'dghdfh',
             [
                 'label' => __('Title Color', 'landzai'),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -142,10 +211,25 @@ class landzai_content_section extends Widget_Base
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'team_socials_bg',
-                'label' => __('Team Social BG', 'landzai'),
+                'name' => 'con_lay4',
+                'label' => __('Icon Image', 'landzai'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .accordion .acc-btn.collapsed .toggle-icon',
+                'condition' => [
+                    'layout' => 'layout4',
+                ],
+                'selector' => '{{WRAPPER}} .fantastic-area .fantastic-image:before',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'con_lay44',
+                'label' => __('Icon Image', 'landzai'),
+                'types' => ['classic', 'gradient'],
+                'condition' => [
+                    'layout' => 'layout4',
+                ],
+                'selector' => '{{WRAPPER}} .fantastic-area .fantastic-image:after',
             ]
         );
         $this->end_controls_section();
@@ -154,26 +238,7 @@ class landzai_content_section extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-    echo '<!-- built app area start here  -->
-        <section class="built-app-area section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 align-self-center">
-                        <div class="bulit-app-content">
-                            <h2>'.$settings['title'].'</h2>
-                            <p>'.$settings['info'].'</p>
-                            <a '.get_that_link($settings['link']).' class="primary-btn">'.$settings['button'].' <i class="icon fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="bulit-app-img">
-                              '.get_that_image($settings['image']).'
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- built app area end here  -->';
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
 
 
