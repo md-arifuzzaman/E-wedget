@@ -156,12 +156,12 @@ class landzai_features extends Widget_Base {
             ]
         );
         $this->add_control(
-            'post_bg',
+            'features-area-two',
             [
-                'label' => __( 'Post BG', 'landzai' ),
+                'label' => __( 'icon background', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .default-blog .caption' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .features-area-two .single-features .features-icon' => 'background: {{VALUE}}',
                 ],
             ]
         );
@@ -204,7 +204,7 @@ class landzai_features extends Widget_Base {
 
         include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
-    protected function _content_template() {}
+    
 
     protected function content_template() {}
 

@@ -259,6 +259,47 @@
 
     };
 
+    var LandzaiTestimonial3 = function ($scope, $) {
+
+        $scope.find('.testimonial-three-area').each(function () {
+            var settings = $(this).data('landzai');
+
+        // Js Start
+        $(".testimonial-three-active").slick({
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            dots: true,
+            arrows: false,
+            responsive: [
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                },
+              },
+            ],
+          });
+            // Js End
+        });
+
+    };
+
 
     $(window).on('elementor/frontend/init', function () {
         if (elementorFrontend.isEditMode()) {
@@ -270,6 +311,7 @@
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-sslider.default', LandzaiScreenshot);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial2);
+            elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial3);
         }
         else {
             console.log('Elementor frontend mod loaded');
@@ -279,6 +321,7 @@
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-sslider.default', LandzaiScreenshot);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial);
             elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial2);
+            elementorFrontend.hooks.addAction('frontend/element_ready/landzai-testimonial.default', LandzaiTestimonial3);
         }
     });
 console.log('addon js loaded');

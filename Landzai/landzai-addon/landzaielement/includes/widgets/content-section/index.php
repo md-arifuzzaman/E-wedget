@@ -150,9 +150,45 @@ class landzai_content_section extends Widget_Base
                         'title' => __( 'Four', 'landzai' ),
                         'icon' => 'eicon-post-slider',
                     ],
+                    'layout5' => [
+                        'title' => __( 'Five', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
                 ],
                 'default' => 'layout1',
                 'toggle' => true,
+            ]
+        );
+        $repeater2 = new \Elementor\Repeater();
+        $repeater2->add_control(
+            'title5',
+            [
+                'label' => __('Title', 'landzai'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Cloud Service', 'landzai'),
+            ]
+        );
+        $this->add_control(
+            'content_list5',
+            [
+                'label' => __( 'content List', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'condition' => [
+                    'layout' => 'layout5',
+                ],
+                'fields' => $repeater2->get_controls(),
+                'default' => [
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                ],
+                'title_field' => '{{{ title5 }}}',
             ]
         );
 

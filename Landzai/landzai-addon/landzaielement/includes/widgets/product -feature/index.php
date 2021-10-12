@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 
-class landzai_testimonial extends Widget_Base {
+class landzai_product_feature extends Widget_Base {
 
     public function get_name() {
-        return 'landzai-testimonial';
+        return 'landzai-product_feature';
     }
  
     public function get_title() {
-        return __('Testimonail', 'landzai');
+        return __('Product feature', 'landzai');
     }
 
     public function get_icon() {
@@ -27,7 +27,7 @@ class landzai_testimonial extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'content_section',
+            'product_feature_section',
             [
                 'label' => __( 'Content', 'landzai' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -38,45 +38,11 @@ class landzai_testimonial extends Widget_Base {
             [
                 'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'What Our Client Says', 'landzai' ),
+                'default' => __( 'Got A Question?', 'landzai' ),
             ]
         );
         $this->add_control(
-            'info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
-            ]
-        );
-        $repeater = new \Elementor\Repeater();
-        $repeater->add_control(
-            't_title',
-            [
-                'label' => __( 'Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Jerome Bell', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_subtitle',
-            [
-                'label' => __( 'Sub Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'CEO, Angular Corporation', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( '“Lorem ipsum dolor sit amet,  kasd gubergren, no sea takimata dolores et ea rebum. Stet clita ', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            'thumb',
+            'image',
             [
                 'label' => __( 'Choose Image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
@@ -85,66 +51,82 @@ class landzai_testimonial extends Widget_Base {
                 ],
             ]
         );
+        $repeater = new \Elementor\Repeater();
         $repeater->add_control(
-            't_link', [
-                'label' => __('Link', 'landzai'),
-                'type' => Controls_Manager::URL,
-                'show_external' => true,
-                'default' => [
-                    'url' => '#',
-                    'is_external' => true,
-                    'nofollow' => true,
-                ],
+            'f_title1',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Pixel Precision', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            'f_info1',
+            [
+                'label' => __( 'Info', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Lorem ipsum dolor sit amet, con sezs evcte adipise Wcing bibendum ut nulla sempertfd vivea
+                 neque vefel gra egw vida amet Nulla', 'landzai' ),
             ]
         );
         $this->add_control(
-            'testi_list',
+            'product_list_left',
             [
-                'label' => __( 'Testimonial List', 'landzai' ),
+                'label' => __( 'Product List LEft', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
 
                 ],
-                'title_field' => '{{{ t_title }}}',
+                'title_field' => '{{{ f_title1 }}}',
+            ]
+        );
+        $repeater2 = new \Elementor\Repeater();
+        $repeater2->add_control(
+            'f_title2',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Pixel Precision', 'landzai' ),
+            ]
+        );
+        $repeater2->add_control(
+            'f_info2',
+            [
+                'label' => __( 'Info', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Lorem ipsum dolor sit amet, con sezs evcte adipise Wcing bibendum ut nulla sempertfd
+                 vivea neque vefel gra egw vida amet Nulla', 'landzai' ),
             ]
         );
         $this->add_control(
-            'layout',
+            'product_list_right',
             [
-                'label' => __( 'Layout', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    'layout1' => [
-                        'title' => __( 'One', 'landzai' ),
-                        'icon' => 'eicon-form-horizontal',
+                'label' => __( 'Product List Right', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater2->get_controls(),
+                'default' => [
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
-                    'layout2' => [
-                        'title' => __( 'Two', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
-                    'layout3' => [
-                        'title' => __( 'Three', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
                     ],
+
                 ],
-                'default' => 'layout1',
-                'toggle' => true,
+                'title_field' => '{{{ f_title2 }}}',
             ]
         );
         $this->end_controls_section();
@@ -246,9 +228,56 @@ class landzai_testimonial extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        include dirname(__FILE__). '/' . $settings['layout']. '.php';
+        echo'<!-- spectiality area start here  -->
+        <section class="spectiality-area section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="section-title-three mb-37 text-center ">
+                            <h2 class="title">'.$settings['title'].'</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="spectiality-left">
+                            <ul class="spectiality-list">';
+                            if ($settings['product_list_left']) {
+                                foreach ($settings['product_list_left'] as $p_left) {
+                                    echo '<li class="sinle-spectiality">
+                                    <h3>'.$p_left['f_title1'].'</h3>
+                                    <p>'.$p_left['f_info1'].'</p>
+                                </li>';
+                            }
+                        }
+                                echo '</ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-md-none d-lg-block">
+                        <div class="spectiality-img text-center">
+                        '.get_that_image($settings['image']).'
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="spectiality-right">
+                            <ul class="spectiality-list">';
+                            if ($settings['product_list_right']) {
+                                foreach ($settings['product_list_right'] as $p_right) {
+                                    echo '<li class="sinle-spectiality">
+                                    <h3>'.$p_right['f_title2'].'</h3>
+                                    <p>'.$p_right['f_info2'].'</p>
+                                </li>';
+                            }
+                        }
+                                echo '</ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- spectiality area end here  -->';
     }
 
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_testimonial() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_product_feature() );

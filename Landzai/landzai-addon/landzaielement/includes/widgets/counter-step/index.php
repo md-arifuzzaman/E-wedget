@@ -41,6 +41,33 @@ class landzai_counter_step extends Widget_Base {
                 'default' => __('Built The App That Everyone Will Love.', 'landzai'),
             ]
         );
+        $this->add_control(
+            'info',
+            [
+                'label' => __('Info', 'landzai'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'condition' => [
+                    'layout' => 'layout2',
+                ],
+                'default' => __('Lorem ipsum dolor sit amet, conse ctet erur adher ipgr 
+                iscing elit. Risus mi elementum ipsum dictumst mauris duis nullam laoyreet.
+                 Viverra adipiscing non. Semper urna habitant ut vel enim lecerstus tellus 
+                 blandit. Proin vel.', 'landzai'),
+            ]
+        );
+        $this->add_control(
+            'image',
+            [
+                'label' => __( 'Choose Image', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'condition' => [
+                    'layout' => 'layout2',
+                ],
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
         $repeater = new \Elementor\Repeater();
         $repeater->add_control(
             'counter_number',
@@ -78,11 +105,30 @@ class landzai_counter_step extends Widget_Base {
                 'title_field' => '{{{ counter_title }}}',
             ]
         );
+        $this->add_control(
+            'layout',
+            [
+                'label' => __( 'Layout', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'layout1' => [
+                        'title' => __( 'One', 'landzai' ),
+                        'icon' => 'eicon-form-horizontal',
+                    ],
+                    'layout2' => [
+                        'title' => __( 'Two', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                ],
+                'default' => 'layout1',
+                'toggle' => true,
+            ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
             'bottom_sec',
             [
-                'label' => __( 'Bottom Content', 'landzai' ),
+                'label' => __( 'Layout-1 Bottom Content', 'landzai' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -123,6 +169,7 @@ class landzai_counter_step extends Widget_Base {
                 'title_field' => '{{{ conten_title }}}',
             ]
         );
+        
         $this->end_controls_section();
         
         $this->start_controls_section(
@@ -223,63 +270,7 @@ class landzai_counter_step extends Widget_Base {
 
         $settings = $this->get_settings();
 
-
-        echo'<!-- feedback area start here  -->
-        <section class="feedback-area section pb-90 section-bg">
-            <div class="container">
-                <div class="feedback-top">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="section-title-two mb-0">
-                                <h2 class="title">'.$settings['title'].'</h2>
-                                <span class="section-divider"></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="counter-list">';
-                            if ($settings['counter_list']) {
-                                foreach ($settings['counter_list'] as $counter) {
-                                    echo '<div class="single-counter text-center">
-                                    <div class="counter-number">
-                                        <span class="counter">'.$counter['counter_number'].'</span><span>K</span>
-                                    </div>
-                                    <h4 class="counter-title">'.$counter['counter_title'].'</h4>
-                                </div>';
-                            }
-                        }
-                                echo '</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="feedback-list">
-                    <div class="row">';
-                        $loop=0;
-                    if ($settings['conten_list']) {
-                        foreach ($settings['conten_list'] as $conten) {
-                            $loop++;
-                            if($loop==2){
-                                $bg='bg-one';
-                            }else {
-                                $bg='';
-                            }
-                            echo '<div class="col-lg-4 col-md-6">
-                            <div class="single-feedback">
-                                <h3 class="feedback-title">
-                                    <span class="feedback-number '.$bg.'">0'.$loop.'</span> 
-                                    '.$conten['conten_title'].'
-                                </h3>
-                                <div class="feedback-content">
-                                    <p>'.$conten['conten_info'].'</p>
-                                </div>
-                            </div>
-                        </div>
-                    ';
-                    }
-                }
-                        echo '</div>
-            </div>
-        </section>
-        <!-- feedback area end here  -->';
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
 
 

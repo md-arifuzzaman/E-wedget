@@ -111,7 +111,7 @@ class landzai_banner extends Widget_Base
                 'label' => __( 'top-left-image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'condition' => [
-                    'layout' => 'layout2',
+                    'layout' => ['layout2','layout3'],
                 ],
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -124,7 +124,7 @@ class landzai_banner extends Widget_Base
                 'label' => __( 'top-right-image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'condition' => [
-                    'layout' => 'layout2',
+                    'layout' => ['layout2','layout3'],
                 ],
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -137,7 +137,7 @@ class landzai_banner extends Widget_Base
                 'label' => __( 'bottom-left-image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'condition' => [
-                    'layout' => 'layout2',
+                    'layout' => ['layout2','layout3'],
                 ],
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -235,10 +235,10 @@ class landzai_banner extends Widget_Base
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => 'team_socials_bg',
-                'label' => __('Team Social BG', 'landzai'),
+                'name' => 'banner-area-v3',
+                'label' => __('banner-area-v3', 'landzai'),
                 'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .accordion .acc-btn.collapsed .toggle-icon',
+                'selector' => '{{WRAPPER}} .banner-area-v3',
             ]
         );
         $this->end_controls_section();
