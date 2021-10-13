@@ -3,9 +3,6 @@
 class landzai_plugins_hooks {
 
     function __construct() {
- 
-        add_action('wp_body_open',array(&$this,'render_preloader'));
-        add_action('wp_body_open',array(&$this,'render_scroll_top'));
         add_action('upload_mimes',array(&$this,'landzai_mime_type'));
         add_action('wp_enqueue_scripts',array(&$this,'landzai_bar_plugin_scripts'));
 
@@ -20,20 +17,6 @@ class landzai_plugins_hooks {
         add_action('landzai_sidebar',array(&$this,'landzai_render_sidebar'));
 
     }
-    function render_preloader(){
-
-        if( landzai_options('enb_pre') ){
-            echo '<div class="preloader"></div>';
-        }
-    }
-
-    function render_scroll_top(){
-
-        if( landzai_options('enb_scroll') ){
-            echo '<a href="#" class="scroll-top"><i class="fa fa-angle-up"></i></a>';
-        }
-    }
-
     function landzai_render_sidebar(){
 
         $cust_header = landzai_options('sidebar');

@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 
-class landzai_testimonial extends Widget_Base {
+class landzai_woo_grid extends Widget_Base {
 
     public function get_name() {
-        return 'landzai-testimonial';
+        return 'landzai-woo-grid';
     }
  
     public function get_title() {
-        return __('Testimonail', 'landzai');
+        return __('Woo Grid', 'landzai');
     }
 
     public function get_icon() {
@@ -27,7 +27,7 @@ class landzai_testimonial extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'content_section',
+            'product_feature_section',
             [
                 'label' => __( 'Content', 'landzai' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -38,117 +38,55 @@ class landzai_testimonial extends Widget_Base {
             [
                 'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'What Our Client Says', 'landzai' ),
+                'default' => __( 'Choose Your Smart Watch Model', 'landzai' ),
             ]
         );
         $this->add_control(
-            'info',
+            'query_type',
             [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
-            ]
-        );
-        $repeater = new \Elementor\Repeater();
-        $repeater->add_control(
-            't_title',
-            [
-                'label' => __( 'Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Jerome Bell', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_subtitle',
-            [
-                'label' => __( 'Sub Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'CEO, Angular Corporation', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( '“Lorem ipsum dolor sit amet,  kasd gubergren, no sea takimata dolores et ea rebum. Stet clita ', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            'thumb',
-            [
-                'label' => __( 'Choose Image', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
-                ],
-            ]
-        );
-        $repeater->add_control(
-            't_link', [
-                'label' => __('Link', 'landzai'),
-                'type' => Controls_Manager::URL,
-                'show_external' => true,
-                'default' => [
-                    'url' => '#',
-                    'is_external' => true,
-                    'nofollow' => true,
-                ],
-            ]
-        );
-        $this->add_control(
-            'testi_list',
-            [
-                'label' => __( 'Testimonial List', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $repeater->get_controls(),
-                'default' => [
-                    [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-
-                ],
-                'title_field' => '{{{ t_title }}}',
-            ]
-        );
-        $this->add_control(
-            'layout',
-            [
-                'label' => __( 'Layout', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'label' => __('Query type', 'landzai'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'individual',
                 'options' => [
-                    'layout1' => [
-                        'title' => __( 'One', 'landzai' ),
-                        'icon' => 'eicon-form-horizontal',
-                    ],
-                    'layout2' => [
-                        'title' => __( 'Two', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                    'layout3' => [
-                        'title' => __( 'Three', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                    'layout4' => [
-                        'title' => __( 'Four', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
+                    'category' => __('Category', 'landzai'),
+                    'individual' => __('Individual', 'landzai'),
                 ],
-                'default' => 'layout1',
-                'toggle' => true,
+            ]
+        );
+
+        $this->add_control(
+            'cat_query',
+            [
+                'label' => __('Category', 'landzai'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => ae_drop_cat('product_cat'),
+                'multiple' => true,
+                'label_block' => true,
+                'condition' => [
+                    'query_type' => 'category',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'id_query',
+            [
+                'label' => __('Posts', 'landzai'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => ae_drop_posts('product'),
+                'multiple' => true,
+                'label_block' => true,
+                'condition' => [
+                    'query_type' => 'individual',
+                ],
+            ]
+        );
+        $this->add_control(
+            'posts_per_page',
+            [
+                'label' => __('Posts Per Page', 'landzai'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => 3,
             ]
         );
         $this->end_controls_section();
@@ -243,25 +181,85 @@ class landzai_testimonial extends Widget_Base {
                 ],
             ]
         );
-        $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name' => 'background',
-				'label' => __( 'Background', 'landzai' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .testimonial-four-area',
-			]
-		);
         $this->end_controls_section();
 
     }
         
     protected function render(){
 
-        $settings = $this->get_settings();
-        include dirname(__FILE__). '/' . $settings['layout']. '.php';
+        $settings = $this->get_settings_for_display();
+
+        $per_page = $settings['posts_per_page'];
+        $cat = $settings['cat_query'];
+        $id = $settings['id_query'];
+
+
+        if($settings['query_type'] == 'category'){
+            $query_args = array(
+                'post_type' => 'product',
+                'posts_per_page' => $per_page,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'term_id',
+                        'terms' => $cat,
+                    ) ,
+                ) ,
+            );
+        }
+
+        if($settings['query_type'] == 'individual'){
+            $query_args = array(
+                'post_type' => 'product',
+                'posts_per_page' => $per_page,
+                'post__in' =>$id,
+                'orderby' => 'post__in'
+            );
+        }
+
+        $wp_query = new \WP_Query($query_args);
+        
+        global $product;
+
+        echo'<!-- product area start here  -->
+        <section class="product-area section-top pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="section-title-three mb-37 text-center ">
+                            <h2 class="title">'.$settings['title'].'</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="row">';
+                    if ($wp_query->have_posts()) {
+                        while ($wp_query->have_posts()) {
+                            $wp_query->the_post();
+                            echo '<div class="col-lg-4 col-md-6">
+                            <div class="single-product text-center">
+                                <div class="product-thumbnail">
+                                    <a href="'.get_the_permalink().'">
+                                    '.woocommerce_get_product_thumbnail('woocommerce_full_size').'
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name"><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h3>
+                                    <h2 class="poduct-price">'.$product->get_price_html().'</h2>
+                                    <a class="primary-btn-three active" href="'.get_the_permalink().'">Order Now</a>
+                                </div>
+                            </div>
+                        </div>';
+                    }
+                    wp_reset_postdata();
+                }
+                echo '</div>
+                </div>
+            </div>
+        </section>
+        <!-- product area end here  -->';
     }
 
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_testimonial() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_woo_grid() );

@@ -35,7 +35,34 @@ class landzai_features extends Widget_Base {
                 'default' => __( 'Useful Features', 'landzai' ),
             ]
         );
-        
+        $this->add_control(
+            'info',
+            [
+                'label' => __('Info', 'landzai'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'condition' => [
+                    'layout' => 'layout3',
+                ],
+                'default' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Amet, dui, lacus in non massa id tellus amet tincidunt. Lacus ut integer
+                 blandit diam nibh pulvinar. Ultrices phasellus', 'landzai'),
+            ]
+        );
+        $this->add_control(
+            'link', [
+                'label' => __('Button Link', 'landzai'),
+                'type' => Controls_Manager::URL,
+                'condition' => [
+                    'layout' => 'layout3',
+                ],
+                'show_external' => true,
+                'default' => [
+                    'url' => '#',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ],
+            ]
+        );
         $this->add_control(
             'query_type',
             [

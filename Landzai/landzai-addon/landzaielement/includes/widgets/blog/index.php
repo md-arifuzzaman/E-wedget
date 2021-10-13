@@ -110,6 +110,10 @@ class landzai_blog extends Widget_Base {
                         'title' => __( 'Layout 3', 'landzai' ),
                         'icon' => 'eicon-post-slider',
                     ],
+                    'layout4' => [
+                        'title' => __( 'Layout 4', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
                 ],
                 'default' => 'layout1',
                 'toggle' => true,

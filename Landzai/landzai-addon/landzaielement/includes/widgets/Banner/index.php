@@ -157,6 +157,48 @@ class landzai_banner extends Widget_Base
                 ],
             ]
         );
+        $repeater = new \Elementor\Repeater();
+        $repeater->add_control(
+            'icon_title',
+            [
+                'label' => __( 'Icon', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Landzai', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            'icon',
+            [
+                'label' => __( 'Choose Image', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+        $this->add_control(
+            'icon_list',
+            [
+                'label' => __( 'Icon List', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'condition' => [
+                    'layout' => 'layout4',
+                ],
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                    [
+                        'title' => __( 'List', 'landzai' ),
+                    ],
+                ],
+                'title_field' => '{{{ icon_title }}}',
+            ]
+        );
         $this->add_control(
             'layout',
             [
@@ -173,6 +215,10 @@ class landzai_banner extends Widget_Base
                     ],
                     'layout3' => [
                         'title' => __( 'Three', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                    'layout4' => [
+                        'title' => __( 'Four', 'landzai' ),
                         'icon' => 'eicon-post-slider',
                     ],
                 ],

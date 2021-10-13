@@ -122,7 +122,7 @@
         function create_features_cpt() {
             $labels = array(
                 'name' => __('Features', 'landzai'),
-                'singular_name' => __('Doctor', 'landzai'),
+                'singular_name' => __('Feature', 'landzai'),
                 'add_new' => __('Add feature', 'landzai'),
                 'add_new_item' => __('Add feature', 'landzai'),
                 'edit_item' => __('Edit feature', 'landzai'),

@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
 
-class landzai_testimonial extends Widget_Base {
+class landzai_team extends Widget_Base {
 
     public function get_name() {
-        return 'landzai-testimonial';
+        return 'landzai-team';
     }
  
     public function get_title() {
-        return __('Testimonail', 'landzai');
+        return __('Team', 'landzai');
     }
 
     public function get_icon() {
@@ -38,7 +38,7 @@ class landzai_testimonial extends Widget_Base {
             [
                 'label' => __( 'Title', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'What Our Client Says', 'landzai' ),
+                'default' => __( 'Got A Question?', 'landzai' ),
             ]
         );
         $this->add_control(
@@ -50,33 +50,10 @@ class landzai_testimonial extends Widget_Base {
                  tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.', 'landzai' ),
             ]
         );
+        
         $repeater = new \Elementor\Repeater();
         $repeater->add_control(
-            't_title',
-            [
-                'label' => __( 'Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Jerome Bell', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_subtitle',
-            [
-                'label' => __( 'Sub Title', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'CEO, Angular Corporation', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            't_info',
-            [
-                'label' => __( 'Info', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( '“Lorem ipsum dolor sit amet,  kasd gubergren, no sea takimata dolores et ea rebum. Stet clita ', 'landzai' ),
-            ]
-        );
-        $repeater->add_control(
-            'thumb',
+            'image',
             [
                 'label' => __( 'Choose Image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
@@ -86,8 +63,81 @@ class landzai_testimonial extends Widget_Base {
             ]
         );
         $repeater->add_control(
-            't_link', [
-                'label' => __('Link', 'landzai'),
+            't_title',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Jerome Bell', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+            't_desig',
+            [
+                'label' => __( 'Designation', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'UI/UX Designer', 'landzai' ),
+            ]
+        );
+        $repeater->add_control(
+			'icon1',
+			[
+				'label' => __( 'Social Icons 1', 'landzai' ),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fab fa-twitter',
+					'library' => 'brand',
+				],
+			]
+		);
+        $repeater->add_control(
+            'link1', [
+                'label' => __('Link 1', 'landzai'),
+                'type' => Controls_Manager::URL,
+                'show_external' => true,
+                'default' => [
+                    'url' => '#',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ],
+            ]
+        );
+        $repeater->add_control(
+			'icon2',
+			[
+				'label' => __( 'Social Icons 2', 'landzai' ),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fab fa-twitter',
+					'library' => 'brand',
+				],
+			]
+		);
+        $repeater->add_control(
+            'link2', [
+                'label' => __('Link 2', 'landzai'),
+                'type' => Controls_Manager::URL,
+                'show_external' => true,
+                'default' => [
+                    'url' => '#',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ],
+            ]
+        );
+        $repeater->add_control(
+			'icon3',
+			[
+				'label' => __( 'Social Icons 3', 'landzai' ),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'default' => [
+					'value' => 'fab fa-twitter',
+					'library' => 'brand',
+				],
+			]
+		);
+        $repeater->add_control(
+            'link3', [
+                'label' => __('Link 3', 'landzai'),
                 'type' => Controls_Manager::URL,
                 'show_external' => true,
                 'default' => [
@@ -98,57 +148,24 @@ class landzai_testimonial extends Widget_Base {
             ]
         );
         $this->add_control(
-            'testi_list',
+            'team_list',
             [
-                'label' => __( 'Testimonial List', 'landzai' ),
+                'label' => __( 'Team List', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                        't_title' => __( 'UI/UX Designer', 'landzai' ),
                     ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                    [
+                        't_title' => __( 'UI/UX Designer', 'landzai' ),
                     ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
-                    ],
-                     [
-                        't_title' => __( 'Savannah Nguyen', 'landzai' ),
+                    [
+                        't_title' => __( 'UI/UX Designer', 'landzai' ),
                     ],
 
                 ],
                 'title_field' => '{{{ t_title }}}',
-            ]
-        );
-        $this->add_control(
-            'layout',
-            [
-                'label' => __( 'Layout', 'landzai' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    'layout1' => [
-                        'title' => __( 'One', 'landzai' ),
-                        'icon' => 'eicon-form-horizontal',
-                    ],
-                    'layout2' => [
-                        'title' => __( 'Two', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                    'layout3' => [
-                        'title' => __( 'Three', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                    'layout4' => [
-                        'title' => __( 'Four', 'landzai' ),
-                        'icon' => 'eicon-post-slider',
-                    ],
-                ],
-                'default' => 'layout1',
-                'toggle' => true,
             ]
         );
         $this->end_controls_section();
@@ -243,15 +260,6 @@ class landzai_testimonial extends Widget_Base {
                 ],
             ]
         );
-        $this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
-			[
-				'name' => 'background',
-				'label' => __( 'Background', 'landzai' ),
-				'types' => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .testimonial-four-area',
-			]
-		);
         $this->end_controls_section();
 
     }
@@ -259,9 +267,46 @@ class landzai_testimonial extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        include dirname(__FILE__). '/' . $settings['layout']. '.php';
+
+        echo'<!-- team area start  here  -->
+        <div class="team-area section-top pb-90 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="section-title-four mb-45 text-center ">
+                            <h2 class="title">'.$settings['title'].'</h2>
+                            <p class="sub-title">'.$settings['info'].'</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">';
+                if ($settings['team_list']) {
+                    foreach ($settings['team_list'] as $team) {
+                    echo '<div class="col-lg-4 col-ld-4 col-sm-6">
+                        <div class="single-team text-center">
+                            <div class="team-thumbnail">
+                                <a href="#">'.get_that_image($team['image']).'</a>
+                            </div>
+                            <div class="member-info">
+                                <h3><a href="#">'.$team['t_title'].'</a></h3>
+                                <h4>'.$team['t_desig'].'</h4>
+                                <ul class="member-social-media">
+                                    <li><a '.get_that_link($team['link1']).'>';\Elementor\Icons_Manager::render_icon( $team['icon1'], [ 'aria-hidden' => 'true' ] );echo'</a></li>
+                                    <li><a '.get_that_link($team['link2']).'>';\Elementor\Icons_Manager::render_icon( $team['icon2'], [ 'aria-hidden' => 'true' ] );echo'</a></li>
+                                    <li><a '.get_that_link($team['link3']).'>';\Elementor\Icons_Manager::render_icon( $team['icon3'], [ 'aria-hidden' => 'true' ] );echo'</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+            echo '</div>
+            </div>
+        </div>
+        <!-- team area end  here  -->';
+
     }
 
 
 }
-Plugin::instance()->widgets_manager->register_widget_type( new landzai_testimonial() );
+Plugin::instance()->widgets_manager->register_widget_type( new landzai_team() );

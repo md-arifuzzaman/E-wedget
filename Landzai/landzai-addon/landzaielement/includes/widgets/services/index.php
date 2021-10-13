@@ -28,6 +28,24 @@ class landzai_services extends Widget_Base {
             ]
         );
         $this->add_control(
+            'title',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Useful Features', 'landzai' ),
+            ]
+        );
+        $this->add_control(
+            'info',
+            [
+                'label' => __('Info', 'landzai'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Amet, dui, lacus in non massa id tellus amet tincidunt. Lacus ut integer
+                 blandit diam nibh pulvinar. Ultrices phasellus', 'landzai'),
+            ]
+        );
+        $this->add_control(
             'query_type',
             [
                 'label' => __('Query type', 'landzai'),
@@ -90,20 +108,16 @@ class landzai_services extends Widget_Base {
                 'label' => __( 'Layout', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
-                    'style-1' => [
-                        'title' => __( 'Style 1', 'landzai' ),
+                    'layout1' => [
+                        'title' => __( 'One', 'landzai' ),
                         'icon' => 'eicon-form-horizontal',
                     ],
-                    'style-2' => [
-                        'title' => __( 'Style 2', 'landzai' ),
+                    'layout2' => [
+                        'title' => __( 'Two', 'landzai' ),
                         'icon' => 'eicon-post-slider',
                     ],
-                    'style-3' => [
-                        'title' => __( 'Style 3', 'landzai' ),
-                        'icon' => 'fas fa-align-justify',
-                    ],
                 ],
-                'default' => 'style-1',
+                'default' => 'layout1',
                 'toggle' => true,
             ]
         );
@@ -290,33 +304,9 @@ class landzai_services extends Widget_Base {
 
         $wp_query = new \WP_Query($query_args);
 
-        $layout = $settings['layout'] == 'style-3' ? 'col-lg-6 col-md-6' : 'col-lg-4 col-md-6';
-    echo '<!-- Our Work -->
-        <section class="service '.$settings['layout'].'">
-            <div class="row">';
-                        if( $wp_query->have_posts() ) {
-                            while( $wp_query->have_posts() ) {
-                                $wp_query->the_post();
-                echo '<article class="'.$layout.'">
-                            <div class="item center">
-                                <div class="icon-holder hexagon">';
-                                if (!empty(landzai_service_meta('service_icon'))) {
-                                    echo '<i class="' . landzai_service_meta('service_icon') . '"></i>';
-                                }
-                                    echo '</div>
-                                <a href="' . get_the_permalink() . '"><h4>' . get_the_title() . '</h4></a>
-                                <p>' . wp_trim_words(get_the_content(), 15) . '</p>
-                                <a href="' . get_the_permalink() . '" class="thm-btn">'.$settings['btn'].'</a>
-                            </div>
-                        </article>';
-                        }
-                        wp_reset_postdata();
-                       }
-                echo'</div>
-        </section>
-    <!-- Our Work End -->';
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
-    protected function _content_template() {}
+
 
     protected function content_template() {}
 

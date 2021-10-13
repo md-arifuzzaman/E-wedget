@@ -108,10 +108,10 @@ class landzai_content_section extends Widget_Base
         $this->add_control(
             'content_list3',
             [
-                'label' => __( 'Brand List', 'landzai' ),
+                'label' => __( 'Icon List', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'condition' => [
-                    'layout' => 'layout3',
+                    'layout' => ['layout3','layout6'],
                 ],
                 'fields' => $repeater->get_controls(),
                 'default' => [
@@ -152,6 +152,10 @@ class landzai_content_section extends Widget_Base
                     ],
                     'layout5' => [
                         'title' => __( 'Five', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                    'layout6' => [
+                        'title' => __( 'Six', 'landzai' ),
                         'icon' => 'eicon-post-slider',
                     ],
                 ],
