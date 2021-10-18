@@ -55,6 +55,9 @@ class landzai_faq extends Widget_Base {
             [
                 'label' => __( 'Choose Image', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
+                'condition' => [
+                    'layout' => 'layout1',
+                ],
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
                 ],
@@ -84,7 +87,7 @@ class landzai_faq extends Widget_Base {
         $this->add_control(
             'faq_list',
             [
-                'label' => __( 'Faq List', 'landzai' ),
+                'label' => __( 'Faq List One', 'landzai' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
@@ -103,6 +106,70 @@ class landzai_faq extends Widget_Base {
 
                 ],
                 'title_field' => '{{{ f_title }}}',
+            ]
+        );
+        $repeater2 = new \Elementor\Repeater();
+        $repeater2->add_control(
+            'f_title2',
+            [
+                'label' => __( 'Title', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+            ]
+        );
+        $repeater2->add_control(
+            'f_info2',
+            [
+                'label' => __( 'Info', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor tempus sit id commu
+                 tincidunt. Tempor etiam at in nisl ac tortor, ut vitae fermentum. Nibh eget blandit suscipit
+                  ornare donec eget semper orci. Malesuada tortor neque, posuere egtnhet viverra auctor ac
+                   egestas tellus. Turpis venenatis, viverra nisi aliquet diam 
+                odio condimentum. In vel consectetur auctor interdum pulvinar tortor. Duis turpis in sit', 'landzai' ),
+            ]
+        );
+        $this->add_control(
+            'faq_list2',
+            [
+                'label' => __( 'Faq List Two', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater2->get_controls(),
+                'default' => [
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                    ],
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                    ],
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                    ],
+                    [
+                        'f_title' => __( 'How Can I Integrate Avocode To My Current Tool Stack?', 'landzai' ),
+                    ],
+
+                ],
+                'title_field' => '{{{ f_title2 }}}',
+            ]
+        );
+        $this->add_control(
+            'layout',
+            [
+                'label' => __( 'Layout', 'landzai' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'layout1' => [
+                        'title' => __( 'Layout 1', 'landzai' ),
+                        'icon' => 'eicon-form-horizontal',
+                    ],
+                    'layout2' => [
+                        'title' => __( 'Layout 2', 'landzai' ),
+                        'icon' => 'eicon-post-slider',
+                    ],
+                ],
+                'default' => 'layout1',
+                'toggle' => true,
             ]
         );
         $this->end_controls_section();
@@ -204,57 +271,7 @@ class landzai_faq extends Widget_Base {
     protected function render(){
 
         $settings = $this->get_settings();
-        echo ' <!-- faq area start here  -->
-        <section class="faq-area section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <h2 class="title">'.$settings['title'].'</h2>
-                            <p class="sub-title">'.$settings['info'].'</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="faq-list">
-                            <div class="accordion" id="accordionExample">';
-
-        if ($settings['faq_list']) {
-            $index = 0;
-            foreach ($settings['faq_list'] as $faq) {
-                $index++;
-                if ($index == 0){
-                    $show = 'show';
-                    $collapsed = '';
-                } else {
-                    $show = '';
-                    $collapsed = 'collapsed';
-                }
-                echo '<div class="card">
-                                    <div class="card-header" id="heading'.$faq['_id'].'">
-                                        <button type="button" class="btn btn-link '.$collapsed.'" data-toggle="collapse" data-target="#collapse'.$faq['_id'].'">'.$faq['f_title'].'</button>
-                                    </div>
-                                    <div id="collapse'.$faq['_id'].'" class="collapse '.$show.'" aria-labelledby="heading'.$faq['_id'].'" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <p>'.$faq['f_info'].' </p>
-                                        </div>
-                                    </div>
-                                </div>';
-            }
-        }
-                echo '</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="faq-img">
-                            '.get_that_image($settings['image']).'
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- faq area end here  -->';
+        include dirname(__FILE__). '/' . $settings['layout']. '.php';
     }
 
 
